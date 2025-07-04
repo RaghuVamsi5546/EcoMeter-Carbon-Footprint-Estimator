@@ -1,0 +1,9 @@
+pandas
+numpy
+scikit-learn
+pyyaml
+python-box
+ensure
+joblib
+
+-e .
