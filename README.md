@@ -12,33 +12,6 @@ This project provides:
 
 ---
 
-## 📂 Project Structure
-
-```
-
-.
-├── src/
-│   ├── components/
-│   │   ├── data\_ingestion.py
-│   │   ├── data\_transformation.py
-│   │   └── model\_trainer.py
-│   ├── exception.py
-│   ├── logger.py
-│   ├── pipeline/
-│   │   └── predict\_pipeline.py
-│   └── utils.py
-├── artifacts/          # Saved models and preprocessors
-├── static/             # Downloadable prediction files
-├── templates/
-│   └── index.html      # Web UI template
-├── app.py              # Flask application
-├── requirements.txt
-├── setup.py
-└── README.md
-
-````
-
----
 
 ## 🚀 How to Install & Run
 
