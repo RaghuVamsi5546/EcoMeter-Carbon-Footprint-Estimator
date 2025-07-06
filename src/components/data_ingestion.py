@@ -1,11 +1,12 @@
 import os
 import sys
-import pandas as pd
 from dataclasses import dataclass
+
+import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from src.logger import logging 
-from src.exception import CustomException  
+from src.logger import logging
+from src.exception import CustomException
 
 
 @dataclass
@@ -13,6 +14,7 @@ class DataIngestionConfig:
     """
     Configuration class that holds file paths for data ingestion outputs.
     """
+    raw_data_path: str = os.path.join("notebook", "data", "data.csv")
     train_data_path: str = os.path.join("artifacts", "train.csv")
     test_data_path: str = os.path.join("artifacts", "test.csv")
 
@@ -25,17 +27,22 @@ class DataIngestion:
     def __init__(self):
         self.ingestion_config = DataIngestionConfig()
 
-    def initiate_data_ingestion(self):
+    def initiate_data_ingestion(self) -> tuple[str, str]:
         """
         Reads the raw dataset, splits it into training and testing datasets, and saves them.
+
         Returns:
-            Tuple[str, str]: Paths to train and test datasets.
+            Tuple[str, str]: (train_data_path, test_data_path)
         """
         logging.info("Entered the data ingestion method/component")
 
         try:
+            if not os.path.exists(self.ingestion_config.raw_data_path):
+                logging.error(f"Raw data file not found at {self.ingestion_config.raw_data_path}")
+                raise FileNotFoundError(f"File not found: {self.ingestion_config.raw_data_path}")
+
             # Read raw dataset
-            df = pd.read_csv("notebook/data/train.csv")
+            df = pd.read_csv(self.ingestion_config.raw_data_path, encoding="utf-8")
             logging.info("Dataset loaded successfully")
 
             # Ensure artifact directory exists
